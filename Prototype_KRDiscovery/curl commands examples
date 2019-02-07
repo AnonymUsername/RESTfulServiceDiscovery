@@ -1,0 +1,48 @@
+Creation of a resource graph with 10000 resources
+
+1. Creation of the function graph:
+curl -H "Content-Type: application/json" -X POST http://localhost:5000/fct  (the specs of the function graph should be modified directly from the function existing in 'graphs_sim.py' file)
+
+2. Creation of virtual resources:
+curl -d '{"operations":["ATC", "CTC", "BEDP", "OVD", "MVD", "OVI", "MVI", "fa", "fb", "fc", "fd", "fe", "ff", "fg", "fh", "fi", "fj", "fk", "fl", "fm"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/vresource
+
+3. Creation of dynamic resources:
+curl -d '{"koperations": [{"fct": "ATC","k": "250"},{"fct": "CTC","k": "250"}, {"fct": "OVD","k": "250"}, {"fct": "MVD","k": "250"}, {"fct": "OVI","k": "250"}, {"fct": "MVI","k": "250"}, {"fct": "BEDP","k": "250"}, {"fct": "fa","k": "250"}, {"fct": "fb","k": "250"}, {"fct": "fc","k": "250"}, {"fct": "fd","k": "250"}, {"fct": "fe","k": "250"}, {"fct": "ff","k": "250"}, {"fct": "fg","k": "250"}, {"fct": "fh","k": "250"}, {"fct": "fi","k": "250"}, {"fct": "fj","k": "250"}, {"fct": "fk","k": "250"}, {"fct": "fl","k": "250"}, {"fct": "fm","k": "250"}]}' -H "Content-Type: application/json" -X POST http://localhost:5000/dresource
+
+4. Creation of static resources:
+curl -d '{"koperations": [{"fct": "ATC","k": "250"},{"fct": "CTC","k": "250"}, {"fct": "OVD","k": "250"}, {"fct": "MVD","k": "250"}, {"fct": "OVI","k": "250"}, {"fct": "MVI","k": "250"}, {"fct": "BEDP","k": "250"}, {"fct": "fa","k": "250"}, {"fct": "fb","k": "250"}, {"fct": "fc","k": "250"}, {"fct": "fd","k": "250"}, {"fct": "fe","k": "250"}, {"fct": "ff","k": "250"}, {"fct": "fg","k": "250"}, {"fct": "fh","k": "250"}, {"fct": "fi","k": "250"}, {"fct": "fj","k": "250"}, {"fct": "fk","k": "250"}, {"fct": "fl","k": "250"}, {"fct": "fm","k": "250"}], "dep_operations": [{"fct1": "ATC","fct2": "BEDP"}, {"fct1": "CTC","fct2": "OVD"}, {"fct1": "CTC","fct2": "MVD"}, {"fct1": "OVD","fct2": "OVI"}, {"fct1": "MVD","fct2": "MVI"}, {"fct1": "OVI","fct2": "BEDP"}, {"fct1": "MVI","fct2": "BEDP"}, {"fct1": "fa","fct2": "CTC"}, {"fct1": "fc","fct2": "fa"}, {"fct1": "fe","fct2": "fc"}, {"fct1": "fg","fct2": "fe"}, {"fct1": "fi","fct2": "fg"}, {"fct1": "fk","fct2": "fi"}, {"fct1": "fk","fct2": "fj"}, {"fct1": "fl","fct2": "fk"}, {"fct1": "fm","fct2": "fl"}, {"fct1": "fb","fct2": "ATC"}, {"fct1": "fd","fct2": "fb"}, {"fct1": "ff","fct2": "fd"}, {"fct1": "fh","fct2": "ff"}, {"fct1": "fj","fct2": "fh"}]}' -H "Content-Type: application/json" -X POST http://localhost:5000/sresource
+
+5. Filling the 'from.py' and 'appregister.py' files:
+curl -H "Content-Type: application/json" -X GET http://localhost:5000/importres
+
+6. Copying the references of the created resources in both 'from.py' and 'appregister.py' files to 'server.py' file
+
+7. Executing the bfs-based KR discovery algorithm from its root:
+curl -d '{"K":"1", "operations":["ATC", "CTC", "BEDP", "OVD", "MVD", "OVI", "MVI"], "url":["http://localhost:5000/resource/SR_fm_1"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/resource/discovery
+
+8. Executing the bfs-based KR algorithm from more suitable resources:
+curl -d '{"K":"1", "operations":["ATC", "CTC", "BEDP", "OVD", "MVD", "OVI", "MVI"], "url":["http://localhost:5000/resource/SR_ATC_1", "http://localhost:5000/resource/SR_CTC_1"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/resource/discovery
+
+-------------------------------------------------------------------------------------------------------------------------------
+BFS vs DFS
+
+Execution of BFS to search on function 100:
+curl -d '{"K":"1", "operations":["100"], "url":["http://localhost:5000/resource/SR_fm_1"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/resource
+
+Execution of DFS to search on function 441:
+curl -d '{"K":"1", "operations":["441"], "url":["http://localhost:5000/resource/SR_fm_1"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/resource/dfs
+--------------------------------------------------------------------------------------------------------------------------------
+
+Evaluation of the construction of the indexing schema with 50 functions and 1000 resources
+
+1. Creation of the functions dependencies or the indexing schema (the output is used for the creation of the static resources query)
+curl -H "Content-Type: application/json" -X POST http://localhost:5000/ids
+
+2. Creation of static resources: 
+curl -d '{"koperations": [{"fct": "1","k": "20"},{"fct": "2","k": "20"},{"fct": "3","k": "20"},{"fct": "4","k": "20"},{"fct": "5","k": "20"},{"fct": "6","k": "20"},{"fct": "7","k": "20"},{"fct": "8","k": "20"},{"fct": "9","k": "20"},{"fct": "10","k": "20"},{"fct": "11","k": "20"},{"fct": "12","k": "20"},{"fct": "13","k": "20"},{"fct": "14","k": "20"},{"fct": "15","k": "20"},{"fct": "16","k": "20"},{"fct": "17","k": "20"},{"fct": "18","k": "20"},{"fct": "19","k": "20"},{"fct": "20","k": "20"},{"fct": "21","k": "20"},{"fct": "22","k": "20"},{"fct": "23","k": "20"},{"fct": "24","k": "20"},{"fct": "25","k": "20"},{"fct": "26","k": "20"},{"fct": "27","k": "20"},{"fct": "28","k": "20"},{"fct": "29","k": "20"},{"fct": "30","k": "20"},{"fct": "31","k": "20"},{"fct": "32","k": "20"},{"fct": "33","k": "20"},{"fct": "34","k": "20"},{"fct": "35","k": "20"},{"fct": "36","k": "20"},{"fct": "37","k": "20"},{"fct": "38","k": "20"},{"fct": "39","k": "20"},{"fct": "40","k": "20"},{"fct": "41","k": "20"},{"fct": "42","k": "20"},{"fct": "43","k": "20"},{"fct": "44","k": "20"},{"fct": "45","k": "20"},{"fct": "46","k": "20"},{"fct": "47","k": "20"},{"fct": "48","k": "20"},{"fct": "49","k": "20"},{"fct": "50","k": "20"}], "dep_operations": [{"fct1": "1","fct2": "2"},{"fct1": "2","fct2": "3"},{"fct1": "3","fct2": "4"},{"fct1": "4","fct2": "5"},{"fct1": "5","fct2": "6"},{"fct1": "6","fct2": "7"},{"fct1": "7","fct2": "8"},{"fct1": "8","fct2": "9"},{"fct1": "9","fct2": "10"},{"fct1": "10","fct2": "11"},{"fct1": "11","fct2": "12"},{"fct1": "12","fct2": "13"},{"fct1": "13","fct2": "14"},{"fct1": "14","fct2": "15"},{"fct1": "15","fct2": "16"},{"fct1": "16","fct2": "17"},{"fct1": "17","fct2": "18"},{"fct1": "18","fct2": "19"},{"fct1": "19","fct2": "20"},{"fct1": "20","fct2": "21"},{"fct1": "21","fct2": "22"},{"fct1": "22","fct2": "23"},{"fct1": "23","fct2": "24"},{"fct1": "24","fct2": "25"},{"fct1": "25","fct2": "26"},{"fct1": "26","fct2": "27"},{"fct1": "27","fct2": "28"},{"fct1": "28","fct2": "29"},{"fct1": "29","fct2": "30"},{"fct1": "30","fct2": "31"},{"fct1": "31","fct2": "32"},{"fct1": "32","fct2": "33"},{"fct1": "33","fct2": "34"},{"fct1": "34","fct2": "35"},{"fct1": "35","fct2": "36"},{"fct1": "36","fct2": "37"},{"fct1": "37","fct2": "38"},{"fct1": "38","fct2": "39"},{"fct1": "39","fct2": "40"},{"fct1": "40","fct2": "41"},{"fct1": "41","fct2": "42"},{"fct1": "42","fct2": "43"},{"fct1": "43","fct2": "44"},{"fct1": "44","fct2": "45"},{"fct1": "45","fct2": "46"},{"fct1": "46","fct2": "47"},{"fct1": "47","fct2": "48"},{"fct1": "48","fct2": "49"},{"fct1": "49","fct2": "50"}]}' -H "Content-Type: application/json" -X POST http://localhost:5000/insresource
+
+3. Filling the 'infrom.py' and 'inappregister.py' files:
+curl -H "Content-Type: application/json" -X GET http://localhost:5000/inimportres
+
+4. Construction of the indexing schema:
+curl -d '{"url":["http://localhost:5000/resource/SR_1_1"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/resource/resfunn
