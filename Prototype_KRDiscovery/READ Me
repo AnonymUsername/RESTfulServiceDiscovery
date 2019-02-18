@@ -1,5 +1,5 @@
 This source code is used to implement an automatic K-Resource discovery solution based on a BFS-algorithm.
-The code also contains developments related to the comparison of BFS and DFS, and to the performance evaluation of the construction of the indexing schema.
+The code also contains developments related to the comparison between BFS and DFS algorithms, and to the performance evaluation of the construction of the indexing schema linking the resources to their provided functions.
 
 * Dependencies:
 - flask
