@@ -8,6 +8,6 @@ The code also contains developments related to the comparison of BFS and DFS, an
 Examples of the necessary commands are in the 'curl commands examples' file
 
 P.S. Before executing any command, the user should create:
-4 empty folder having respectively the following names: ‘static’, ‘dynamic’, ‘virtual’, and ‘init_static’ (these are used to stode the created rsources)
+4 empty folder having respectively the following names: ‘static’, ‘dynamic’, ‘virtual’, and ‘init_static’ (these are used to store the created rsources)
 4 empty python files '.py' having respectively the following names: 'from.py', 'appregister.py', 'infrom.py', and 'inappregister.py' (such files store the references of the created resources that will be included in the server: 'server.py' file
 
