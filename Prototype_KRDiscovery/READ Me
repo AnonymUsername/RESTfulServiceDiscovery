@@ -9,5 +9,5 @@ Examples of the necessary commands are included in the 'curl commands examples' 
 
 P.S. Before executing any command, the user should create:
 - 4 empty folder having respectively the following names: ‘static’, ‘dynamic’, ‘virtual’, and ‘init_static’ (these are used to store the created resources)
-- 4 empty python files '.py' having respectively the following names: 'from.py', 'appregister.py', 'infrom.py', and 'inappregister.py' (such files store the references of the created resources that will be included in the server: 'server.py' file)
+- 4 empty python files '.py' having respectively the following names: 'from.py', 'appregister.py', 'infrom.py', and 'inappregister.py' (such files store the references of the created resources that should be included in the server: 'server.py' file)
 
