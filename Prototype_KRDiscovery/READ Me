@@ -1,4 +1,4 @@
-This source code is used to implement an automatic K-Resource discovery solution for hybrid Web connected environments providing linked static resources and connecting dynamic resources.
+This source code is used to implement an automatic K-Resources discovery solution for hybrid Web connected environments providing linked static resources and connecting dynamic resources.
 The code also contains developments related to the comparison between BFS and DFS algorithms, and to the performance evaluation of the construction of the indexing schema linking the resources to their provided functions.
 
 * Dependencies:
