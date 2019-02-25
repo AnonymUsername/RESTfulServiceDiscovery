@@ -5,7 +5,7 @@ The code also contains developments related to the comparison between BFS and DF
 - flask
 - flask_restful
 
-Examples of the necessary commands are in the 'curl commands examples' file
+Examples of the necessary commands are included in the 'curl commands examples' file
 
 P.S. Before executing any command, the user should create:
 - 4 empty folder having respectively the following names: ‘static’, ‘dynamic’, ‘virtual’, and ‘init_static’ (these are used to store the created resources)
